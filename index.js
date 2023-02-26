@@ -2,9 +2,6 @@ import PlayerModule from './src/player.js'
 import ObstacleModule from './src/obstacle.js'
 
 console.log('initing game ...')
-Array.prototype.random = function () {
-  return this[Math.floor(Math.random() * this.length)]
-}
 
 const canvas = document.querySelector('canvas')
 const canvasContext = canvas.getContext('2d')

@@ -1,9 +1,11 @@
+import { random } from './utils.js'
+
 const PLAYER_MOVEMENT_SPEED = 3
 const PLAYER_JUMP_SPEED = 7
 const PLAYER_GAVITY_SPEED = 0.1
 
 const createNewPlayer = () => ({
-  color: ['red', 'blue', 'green', 'yellow'].random(),
+  color: random(['red', 'blue', 'green', 'yellow']),
   height: 30,
   width: 30,
   x: 0,
