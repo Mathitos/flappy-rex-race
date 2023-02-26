@@ -1,4 +1,5 @@
 import PlayerModule from './src/player.js'
+import ObstacleModule from './src/obstacle.js'
 
 console.log('initing game ...')
 Array.prototype.random = function () {
@@ -13,21 +14,7 @@ canvas.height = 576 // 64 * 9
 
 const obstacles = []
 
-const obstacleSpeed = 1
-
 const player1 = PlayerModule.createNewPlayer()
-
-const generateObstacle = () => {
-  const newObstacle = {
-    color: 'blue',
-    height: 200,
-    width: 30,
-    x: 0,
-    y: 0,
-  }
-
-  obstacles.push(newObstacle)
-}
 
 const clearCanvas = () => {
   canvasContext.clearRect(0, 0, canvas.width, canvas.height)
@@ -48,11 +35,16 @@ const handleKeyboardEvents = event => {
 const animateLoop = () => {
   clearCanvas()
   PlayerModule.updatePlayer(player1, canvas.height, canvas.width)
+  obstacles.forEach(obstacle => {
+    ObstacleModule.drawObstacle(obstacle, canvasContext, canvas.height)
+  })
   PlayerModule.drawPlayer(player1, canvasContext)
   window.requestAnimationFrame(animateLoop)
 }
 
 window.addEventListener('keydown', handleKeyboardEvents)
 window.addEventListener('keyup', handleKeyboardEvents)
+
+obstacles.push(ObstacleModule.createNewObstacle(canvas.height))
 
 animateLoop()
