@@ -3,19 +3,28 @@ import ObstacleModule from './obstacle.js'
 
 console.log('initing game ...')
 
+/*
+    ----------------------------------------------------
+    ------------- Setup Game state objects -------------
+    ----------------------------------------------------
+*/
+
 const canvas = document.querySelector('canvas')
 const canvasContext = canvas.getContext('2d')
 
 canvas.width = 1024 // 64 * 16
 canvas.height = 576 // 64 * 9
 
+const player1 = PlayerModule.createNewPlayer()
 const obstacles = []
 
-const player1 = PlayerModule.createNewPlayer()
+obstacles.push(ObstacleModule.createNewObstacle(canvas.height, canvas.width))
 
-const clearCanvas = () => {
-  canvasContext.clearRect(0, 0, canvas.width, canvas.height)
-}
+/*
+    ----------------------------------------------------
+    -------- Listen for players keyboard inputs --------
+    ----------------------------------------------------
+*/
 
 const handleKeyboardEvents = event => {
   if (event.key == 'a' || event.key == 'A') {
@@ -29,6 +38,19 @@ const handleKeyboardEvents = event => {
   }
 }
 
+window.addEventListener('keydown', handleKeyboardEvents)
+window.addEventListener('keyup', handleKeyboardEvents)
+
+/*
+    ----------------------------------------------------
+    -------------- Setup Game render loop --------------
+    ----------------------------------------------------
+*/
+
+const clearCanvas = () => {
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height)
+}
+
 const animateLoop = () => {
   clearCanvas()
   PlayerModule.updatePlayer(player1, canvas.height, canvas.width)
@@ -40,9 +62,6 @@ const animateLoop = () => {
   window.requestAnimationFrame(animateLoop)
 }
 
-window.addEventListener('keydown', handleKeyboardEvents)
-window.addEventListener('keyup', handleKeyboardEvents)
-
-obstacles.push(ObstacleModule.createNewObstacle(canvas.height, canvas.width))
-
 animateLoop()
+
+console.log('starting game, good luck!')
