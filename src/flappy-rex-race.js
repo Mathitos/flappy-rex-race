@@ -16,9 +16,7 @@ canvas.width = 1024 // 64 * 16
 canvas.height = 576 // 64 * 9
 
 const player1 = PlayerModule.createNewPlayer()
-const obstacles = []
-
-obstacles.push(ObstacleModule.createNewObstacle(canvas.height, canvas.width))
+let obstacles = []
 
 /*
     ----------------------------------------------------
@@ -53,11 +51,13 @@ const clearCanvas = () => {
 
 const animateLoop = () => {
   clearCanvas()
+
+  // update game state
+  obstacles = ObstacleModule.updateObstacleList(obstacles, canvas.height, canvas.width)
   PlayerModule.updatePlayer(player1, canvas.height, canvas.width)
-  obstacles.forEach(obstacle => {
-    ObstacleModule.updateObstacle(obstacle)
-    ObstacleModule.drawObstacle(obstacle, canvasContext, canvas.height)
-  })
+
+  // redraw game scene
+  ObstacleModule.drawObstacles(obstacles, canvasContext, canvas.height)
   PlayerModule.drawPlayer(player1, canvasContext)
   window.requestAnimationFrame(animateLoop)
 }
