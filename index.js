@@ -21,10 +21,10 @@ const clearCanvas = () => {
 }
 
 const handleKeyboardEvents = event => {
-  if (event.key == 'a') {
+  if (event.key == 'a' || event.key == 'A') {
     PlayerModule.playerMovingLeft(player1, event.type == 'keydown')
   }
-  if (event.key == 'd') {
+  if (event.key == 'd' || event.key == 'D') {
     PlayerModule.playerMovingRight(player1, event.type == 'keydown')
   }
   if (event.key == ' ' && event.type == 'keydown') {
@@ -36,6 +36,7 @@ const animateLoop = () => {
   clearCanvas()
   PlayerModule.updatePlayer(player1, canvas.height, canvas.width)
   obstacles.forEach(obstacle => {
+    ObstacleModule.updateObstacle(obstacle)
     ObstacleModule.drawObstacle(obstacle, canvasContext, canvas.height)
   })
   PlayerModule.drawPlayer(player1, canvasContext)
@@ -45,6 +46,6 @@ const animateLoop = () => {
 window.addEventListener('keydown', handleKeyboardEvents)
 window.addEventListener('keyup', handleKeyboardEvents)
 
-obstacles.push(ObstacleModule.createNewObstacle(canvas.height))
+obstacles.push(ObstacleModule.createNewObstacle(canvas.height, canvas.width))
 
 animateLoop()

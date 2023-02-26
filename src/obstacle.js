@@ -1,6 +1,6 @@
 const OBSTACLE_SPEED = 1
 
-const createNewObstacle = maxHeight => {
+const createNewObstacle = (maxHeight, maxWidth) => {
   const holeHeight = Math.random() * maxHeight + 40
   const holePosition = Math.random() * (maxHeight - holeHeight)
   return {
@@ -8,7 +8,7 @@ const createNewObstacle = maxHeight => {
     width: 30,
     holeHeight: holeHeight,
     holePosition: holePosition,
-    x: 50,
+    x: maxWidth,
   }
 }
 
@@ -18,4 +18,8 @@ const drawObstacle = (obstacle, canvasContext, canvasHeight) => {
   canvasContext.clearRect(obstacle.x, obstacle.holePosition, obstacle.width, obstacle.holeHeight)
 }
 
-export default { createNewObstacle, drawObstacle }
+const updateObstacle = obstacle => {
+  obstacle.x -= OBSTACLE_SPEED
+}
+
+export default { createNewObstacle, drawObstacle, updateObstacle }
