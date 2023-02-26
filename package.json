@@ -1,7 +1,7 @@
 {
-  "name": "rex-race",
+  "name": "flappy-rex-race",
   "version": "1.0.0",
-  "description": "https://www.youtube.com/watch?v=Lcdc2v-9PjA",
+  "description": "a flappy bird clone in canvas html + javascript",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mathitos/rex-race.git"
+    "url": "git+https://github.com/Mathitos/flappy-rex-race.git"
   },
   "author": "Matheus Anzzulin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mathitos/rex-race/issues"
+    "url": "https://github.com/Mathitos/flappy-rex-race/issues"
   },
-  "homepage": "https://github.com/Mathitos/rex-race#readme",
+  "homepage": "https://github.com/Mathitos/flappy-rex-race#readme",
   "dependencies": {
     "serve": "^14.2.0"
   }

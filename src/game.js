@@ -1,5 +1,5 @@
-import PlayerModule from './src/player.js'
-import ObstacleModule from './src/obstacle.js'
+import PlayerModule from './player.js'
+import ObstacleModule from './obstacle.js'
 
 console.log('initing game ...')
 
