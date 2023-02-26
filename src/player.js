@@ -1,3 +1,7 @@
+const PLAYER_MOVEMENT_SPEED = 3
+const PLAYER_JUMP_SPEED = 7
+const PLAYER_GAVITY_SPEED = 0.1
+
 const createNewPlayer = () => ({
   color: ['red', 'blue', 'green', 'yellow'].random(),
   height: 30,
@@ -6,12 +10,8 @@ const createNewPlayer = () => ({
   y: 0,
   xSpeed: 0,
   ySpeed: 0,
-  gravitySpeed: 0.2,
-  upSpeed: 10,
-  movementSpeed: 5,
-  movingRight: false,
-  movingLeft: false,
-  isJumping: false,
+  isMovingRight: false,
+  isMovingLeft: false,
 })
 
 const drawPlayer = (player, canvasContext) => {
@@ -20,25 +20,25 @@ const drawPlayer = (player, canvasContext) => {
 }
 
 const playerJump = player => {
-  player.ySpeed -= player.upSpeed
+  player.ySpeed -= PLAYER_JUMP_SPEED
 }
 
 const updatePlayer = (player, maxHeight, maxWidth) => {
   player.y += player.ySpeed
   player.x += player.xSpeed
 
-  if (player.movingLeft) {
-    player.xSpeed = -player.movementSpeed
+  if (player.isMovingLeft) {
+    player.xSpeed = -PLAYER_MOVEMENT_SPEED
   } else if (player.xSpeed < 0) {
     player.xSpeed += 1
   }
-  if (player.movingRight) {
-    player.xSpeed = player.movementSpeed
+  if (player.isMovingRight) {
+    player.xSpeed = PLAYER_MOVEMENT_SPEED
   } else if (player.xSpeed > 0) {
     player.xSpeed -= 1
   }
 
-  player.ySpeed += player.gravitySpeed
+  player.ySpeed += PLAYER_GAVITY_SPEED
 
   // check up and down map constraints
   if (player.height + player.y > maxHeight) {
@@ -61,18 +61,18 @@ const updatePlayer = (player, maxHeight, maxWidth) => {
 }
 
 const playerMovingLeft = (player, isMoving) => {
-  player.movingLeft = isMoving
+  player.isMovingLeft = isMoving
 }
 
 const playerMovingRight = (player, isMoving) => {
-  player.movingRight = isMoving
+  player.isMovingRight = isMoving
 }
 
 export default {
-  updatePlayer,
-  playerJump,
-  drawPlayer,
   createNewPlayer,
+  updatePlayer,
+  drawPlayer,
   playerMovingLeft,
   playerMovingRight,
+  playerJump,
 }
