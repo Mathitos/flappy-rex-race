@@ -1,3 +1,4 @@
+import ObstacleModule from './obstacle.js'
 import { random } from './utils.js'
 
 const PLAYER_MOVEMENT_SPEED = 3
@@ -70,6 +71,22 @@ const playerMovingRight = (player, isMoving) => {
   player.isMovingRight = isMoving
 }
 
+const checkCollision = (player, obstacles) => {
+  const playerTopLeft = { x: player.x, y: player.y }
+  const playerTopRight = { x: player.x + player.width, y: player.y }
+  const playerBottomLeft = { x: player.x, y: player.y + player.height }
+  const playerBottomRight = { x: player.x + player.width, y: player.y + player.height }
+  const collided = obstacles.some(
+    obs =>
+      ObstacleModule.isInsideObstacle(obs, playerTopLeft) ||
+      ObstacleModule.isInsideObstacle(obs, playerTopRight) ||
+      ObstacleModule.isInsideObstacle(obs, playerBottomLeft) ||
+      ObstacleModule.isInsideObstacle(obs, playerBottomRight),
+  )
+
+  return collided
+}
+
 export default {
   createNewPlayer,
   updatePlayer,
@@ -77,4 +94,5 @@ export default {
   playerMovingLeft,
   playerMovingRight,
   playerJump,
+  checkCollision,
 }

@@ -71,7 +71,17 @@ const drawObstacles = (obstacles, canvasContext, maxHeight) => {
   })
 }
 
+const isInsideObstacle = (obs, coord) => {
+  const isInObstacleArea = coord.x > obs.x && coord.x < obs.x + obs.width
+  if (isInObstacleArea) {
+    const isInObstacleHole = coord.y > obs.holePosition && coord.y < obs.holePosition + obs.holeSize
+    return !isInObstacleHole
+  }
+  return false
+}
+
 export default {
   updateObstacleList,
   drawObstacles,
+  isInsideObstacle,
 }

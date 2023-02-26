@@ -59,7 +59,16 @@ const animateLoop = () => {
   // redraw game scene
   ObstacleModule.drawObstacles(obstacles, canvasContext, canvas.height)
   PlayerModule.drawPlayer(player1, canvasContext)
-  window.requestAnimationFrame(animateLoop)
+
+  // check for collision
+  const isGameOver = PlayerModule.checkCollision(player1, obstacles)
+
+  if (isGameOver) {
+    console.log('gameover')
+    window.alert('gameover')
+  } else {
+    window.requestAnimationFrame(animateLoop)
+  }
 }
 
 animateLoop()
