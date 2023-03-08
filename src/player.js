@@ -5,10 +5,16 @@ const PLAYER_MOVEMENT_SPEED = 3
 const PLAYER_JUMP_SPEED = 7
 const PLAYER_GAVITY_SPEED = 0.1
 
+let dinoUpSprite = new Image()
+dinoUpSprite.src = 'src/DinoUP.png'
+
+let dinoDownSprite = new Image()
+dinoDownSprite.src = 'src/DinoDown.png'
+
 const createNewPlayer = () => ({
   color: random(['red', 'blue', 'green', 'yellow']),
-  height: 30,
-  width: 30,
+  height: 44,
+  width: 44,
   x: 0,
   y: 0,
   xSpeed: 0,
@@ -19,7 +25,15 @@ const createNewPlayer = () => ({
 
 const drawPlayer = (player, canvasContext) => {
   canvasContext.fillStyle = player.color
-  canvasContext.fillRect(player.x, player.y, player.width, player.height)
+  const sprite = player.ySpeed > 0 ? dinoUpSprite : dinoDownSprite
+
+  canvasContext.drawImage(
+    sprite,
+    player.x - 20,
+    player.y - 10,
+    player.width + 20,
+    player.height + 20,
+  )
 }
 
 const playerJump = player => {
